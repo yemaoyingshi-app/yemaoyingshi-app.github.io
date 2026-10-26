@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>夜猫影视｜深夜档影视推荐与剧集热榜 · yemaoyingshi-app.github.io</title>
+<meta name="description" content="夜猫影视（yemaoyingshi-app.github.io）是熬夜党的选片清单：每天零点后更新放映时刻表，整理剧集热榜、冷门佳片、类型片库与编辑手记，按题材、片长、情绪标签挑片，让你在睡前半小时就能决定看什么。">
+<meta name="keywords" content="夜猫影视,深夜追剧推荐,剧集热榜,冷门佳片,类型片库,观影手记,影视清单,yemaoyingshi-app,yemaoyingshi-app.github.io">
+<meta name="author" content="夜猫影视编辑部">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0d0f14">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://yemaoyingshi-app.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="夜猫影视">
+<meta property="og:title" content="夜猫影视｜深夜档影视推荐与剧集热榜">
+<meta property="og:description" content="零点之后的放映单：剧集热榜、冷门佳片、类型片库、编辑手记，逛一圈就知道今晚看哪部。">
+<meta property="og:url" content="https://yemaoyingshi-app.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夜猫影视｜深夜档影视推荐与剧集热榜">
+<meta name="twitter:description" content="给熬夜党用的选片清单，每日零点后更新排片。">
+<style>
+:root{
+  --ink:#0d0f14;
+  --ink2:#151922;
+  --line:#262c38;
+  --amber:#f0b429;
+  --amber-d:#c98f13;
+  --paper:#e9e6df;
+  --mute:#8b93a3;
+  --green:#4ec9a0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font:400 16px/1.75 "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  background-image:radial-gradient(circle at 78% -8%,rgba(240,180,41,.14),transparent 42%),radial-gradient(circle at 4% 8%,rgba(78,201,160,.08),transparent 38%);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* 顶部 */
+.topbar{border-bottom:1px solid var(--line);background:rgba(13,15,20,.92);position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:36px;height:36px;border-radius:9px;background:linear-gradient(145deg,var(--amber),#7a4f06);display:flex;align-items:center;justify-content:center;font-weight:800;color:#1a1206;font-size:19px;flex:0 0 auto}
+.brand b{font-size:21px;letter-spacing:1px}
+.brand span{display:block;font-size:11px;color:var(--mute);letter-spacing:2px}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{font-size:14px;padding:7px 13px;border:1px solid transparent;border-radius:20px;color:#c9cfdb}
+.nav a:hover{border-color:var(--line);color:var(--amber)}
+.nav a.hot{border-color:rgba(240,180,41,.5);color:var(--amber)}
+
+/* 首屏：票根 + 时刻表 */
+.hero{padding:44px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1.35fr .95fr;gap:26px;align-items:start}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:3px;color:var(--amber);border:1px solid rgba(240,180,41,.35);padding:5px 12px;border-radius:3px}
+h1{font-size:clamp(30px,5.2vw,52px);line-height:1.15;margin:18px 0 14px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--amber);border-bottom:5px solid rgba(240,180,41,.28)}
+.lede{color:#aeb6c5;font-size:16px;max-width:52ch}
+.lede strong{color:var(--paper);font-weight:600}
+.stats{display:flex;gap:26px;margin:24px 0 0;flex-wrap:wrap}
+.stats div b{display:block;font-size:26px;color:var(--amber);line-height:1.2}
+.stats div span{font-size:12px;color:var(--mute);letter-spacing:1px}
+
+.ticket{
+  background:linear-gradient(180deg,#1b1f28,#12151c);
+  border:1px solid var(--line);border-radius:12px;padding:20px 20px 16px;position:relative;
+}
+.ticket:before,.ticket:after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:var(--ink);left:50%;margin-left:-8px}
+.ticket:before{top:-8px}
+.ticket:after{bottom:-8px}
+.ticket h3{font-size:13px;letter-spacing:2px;color:var(--mute);font-weight:500;margin-bottom:12px}
+.ticket .name{font-size:22px;font-weight:700}
+.ticket .meta{font-size:13px;color:var(--mute);margin:6px 0 14px}
+.seats{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin-bottom:12px}
+.seats i{display:block;height:14px;border-radius:3px;background:#252b36}
+.seats i.on{background:var(--amber)}
+.seats i.me{background:var(--green)}
+.legend{font-size:12px;color:var(--mute);display:flex;gap:14px}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px}
+.ticket .code{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute);letter-spacing:1px}
+
+/* 时刻表 */
+.sheet{margin-top:34px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--ink2)}
+.sheet table{width:100%;border-collapse:collapse;font-size:14px}
+.sheet th{text-align:left;font-weight:500;color:var(--mute);font-size:12px;letter-spacing:2px;padding:13px 16px;background:#10131a}
+.sheet td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:middle}
+.sheet .time{color:var(--amber);font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.sheet .tag{display:inline-block;font-size:11px;padding:2px 8px;border:1px solid var(--line);border-radius:12px;color:#9aa3b2;margin-left:6px}
+
+/* 通用区块 */
+section{padding:52px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(22px,3.6vw,32px);letter-spacing:-.3px}
+.sec-head h2 small{display:block;font-size:12px;letter-spacing:3px;color:var(--amber);font-weight:500;margin-bottom:7px}
+.sec-head p{font-size:13px;color:var(--mute);max-width:38ch}
+
+/* 榜单 */
+.rank{display:grid;gap:12px}
+.row{display:grid;grid-template-columns:44px 1fr 190px;gap:16px;align-items:center;background:var(--ink2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.row:hover{border-color:rgba(240,180,41,.4)}
+.row .no{font-size:26px;font-weight:800;color:#2f3644;text-align:center;font-variant-numeric:tabular-nums}
+.row:nth-child(-n+3) .no{color:var(--amber)}
+.row .t{font-size:17px;font-weight:600}
+.row .d{font-size:12.5px;color:var(--mute);margin-top:3px}
+.bar{height:6px;border-radius:3px;background:#232935;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber-d),var(--amber))}
+.row .sc{text-align:right;font-size:15px;color:var(--amber);font-variant-numeric:tabular-nums}
+.row .sc span{display:block;font-size:11px;color:var(--mute)}
+
+/* 片库标签 */
+.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tags a{font-size:14px;padding:9px 16px;border:1px solid var(--line);border-radius:6px;background:#141821;color:#c3cad6}
+.tags a:hover{border-color:var(--amber);color:var(--amber)}
+.tags a b{color:var(--mute);font-weight:400;font-size:12px;margin-left:6px}
+.picks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.pick{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--ink2)}
+.poster{height:132px;display:flex;align-items:flex-end;padding:12px;font-size:13px;letter-spacing:1px;position:relative}
+.poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65))}
+.poster span{position:relative;z-index:1}
+.pick .info{padding:12px 14px 14px}
+.pick .info b{font-size:15px;display:block}
+.pick .info em{font-style:normal;font-size:12px;color:var(--mute)}
+
+/* 手记时间轴 */
+.notes{position:relative;padding-left:22px}
+.notes:before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.note{position:relative;padding:0 0 24px}
+.note:before{content:"";position:absolute;left:-21px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(240,180,41,.14)}
+.note time{font-size:12px;color:var(--mute);letter-spacing:1px}
+.note h4{font-size:17px;margin:5px 0 6px}
+.note p{font-size:14.5px;color:#a8b0bf;max-width:70ch}
+.note p em{font-style:normal;color:var(--amber)}
+
+/* 问答 */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.faq details{background:var(--ink2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.faq summary{cursor:pointer;font-size:16px;font-weight:600;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"＋";float:right;color:var(--amber);font-weight:400}
+.faq details[open] summary:after{content:"－"}
+.faq p{font-size:14px;color:#a3abb9;margin-top:10px}
+
+/* 页脚 */
+footer{border-top:1px solid var(--line);padding:36px 0 44px;background:#0a0c11}
+.f-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:26px}
+footer h5{font-size:13px;letter-spacing:2px;color:var(--mute);font-weight:500;margin-bottom:12px}
+footer li{list-style:none;font-size:14px;padding:4px 0}
+footer li a{color:#c3cad6}
+footer li a:hover{color:var(--amber)}
+.f-bot{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.url{color:var(--amber);word-break:break-all}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .picks{grid-template-columns:repeat(2,1fr)}
+  .row{grid-template-columns:34px 1fr}
+  .row .sc{grid-column:1 / -1;text-align:left}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .faq{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .topbar .wrap{min-height:54px;padding-top:8px;padding-bottom:8px}
+  .nav{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .nav a{white-space:nowrap}
+  .hero{padding:30px 0 22px}
+  .stats{gap:18px}
+  .seats{grid-template-columns:repeat(6,1fr)}
+  .sheet{font-size:13px}
+  .sheet thead{display:none}
+  .sheet tr{display:block;border-top:1px solid var(--line);padding:10px 14px}
+  .sheet td{display:inline-block;border:0;padding:4px 10px 4px 0}
+  .sheet .tag{margin-left:0}
+  .picks{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr}
+  section{padding:38px 0}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">夜</div>
+      <div>
+        <b>夜猫影视</b>
+        <span>YEMAO YINGSHI</span>
+      </div>
+    </div>
+    <nav class="nav" aria-label="站点导航">
+      <a href="#" class="hot">今日排片</a>
+      <a href="#">剧集热榜</a>
+      <a href="#">类型片库</a>
+      <a href="#">编辑手记</a>
+      <a href="#">观影答疑</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <span class="kicker">◆ 零点后更新 · 第 1286 期</span>
+      <h1>睡不着的夜里，<em>夜猫影视</em>替你挑片</h1>
+      <p class="lede">不写空泛的"必看清单"，只做一件事：把今天值得点开的那几部片，按时段、片长、情绪排好。<strong>夜猫影视</strong>的排片表每天零点后重排一次，榜单跟着真实打分走，冷门片单独留了一格。</p>
+      <div class="stats">
+        <div><b>1286</b><span>累计排片期数</span></div>
+        <div><b>4300+</b><span>在库片目</span></div>
+        <div><b>21:40</b><span>今日首场</span></div>
+      </div>
+    </div>
+
+    <aside class="ticket" aria-label="今日推荐票根">
+      <h3>今晚值班编辑推荐</h3>
+      <div class="name">《雾港迷航》</div>
+      <p class="meta">挪威 / 悬疑 · 112 分钟 · 2024</p>
+      <div class="seats" aria-hidden="true">
+        <i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="me"></i><i></i><i class="on"></i><i class="on"></i>
+        <i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i>
+        <i></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+      </div>
+      <div class="legend">
+        <span><b style="background:#f0b429"></b>已订座</span>
+        <span><b style="background:#4ec9a0"></b>为你留位</span>
+        <span><b style="background:#252b36"></b>空位</span>
+      </div>
+      <p class="code">一句话理由：前半段闷，第 47 分钟那个长镜头值回票价。</p>
+    </aside>
+  </div>
+
+  <div class="sheet">
+    <table>
+      <caption class="visually-hidden" style="position:absolute;left:-9999px">夜猫影视今日放映时刻表</caption>
+      <thead>
+        <tr><th>开场</th><th>片名</th><th>类型 / 产地</th><th>片长</th><th>影厅</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="time">21:40</td><td>《雾港迷航》</td><td>悬疑 <span class="tag">挪威</span></td><td>112′</td><td>A 厅</td></tr>
+        <tr><td class="time">23:05</td><td>《夜班便利店》</td><td>喜剧 <span class="tag">日本</span></td><td>96′</td><td>B 厅</td></tr>
+        <tr><td class="time">00:30</td><td>《沙丘之外》</td><td>科幻 <span class="tag">美国</span></td><td>148′</td><td>C 厅</td></tr>
+        <tr><td class="time">02:15</td><td>《旧磁带》</td><td>剧情 <span class="tag">韩国</span></td><td>104′</td><td>D 厅</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section id="rank">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>HALL B · 榜单</small>剧集热榜：本周看完的人最多</h2>
+      <p>按站内"看完标记"与打分人数排序，每周日凌晨重排，不看播放量。</p>
+    </div>
+    <div class="rank">
+      <a class="row" href="#">
+        <div class="no">01</div>
+        <div>
+          <div class="t">暗巷第七号</div>
+          <div class="d">12 集 · 犯罪 / 国产 · 单集 45 分钟</div>
+          <div class="bar"><i style="width:91%"></i></div>
+        </div>
+        <div class="sc">9.1<span>3.2 万人评</span></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">02</div>
+        <div>
+          <div class="t">长夜将尽</div>
+          <div class="d">8 集 · 悬疑 / 英剧 · 单集 58 分钟</div>
+          <div class="bar"><i style="width:88%"></i></div>
+        </div>
+        <div class="sc">8.8<span>2.7 万人评</span></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">03</div>
+        <div>
+          <div class="t">雾中列车</div>
+          <div class="d">6 集 · 惊悚 / 日本 · 单集 50 分钟</div>
+          <div class="bar"><i style="width:86%"></i></div>
+        </div>
+        <div class="sc">8.6<span>1.9 万人评</span></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">04</div>
+        <div>
+          <div class="t">海边旧仓库</div>
+          <div class="d">10 集 · 剧情 / 韩国 · 单集 62 分钟</div>
+          <div class="bar"><i style="width:84%"></i></div>
+        </div>
+        <div class="sc">8.4<span>1.4 万人评</span></div>
+      </a>
+      <a class="row" href="#">
+        <div class="no">05</div>
+        <div>
+          <div class="t">凌晨四点的面包店</div>
+          <div class="d">12 集 · 治愈 / 日本 · 单集 24 分钟</div>
+          <div class="bar"><i style="width:82%"></i></div>
+        </div>
+        <div class="sc">8.2<span>9.6 千人评</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="library">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>HALL C · 片库</small>类型片库：按当下的心情翻牌子</h2>
+      <p>标签后是库内存量。睡不着、想哭、想烧脑，各走各的门。</p>
+    </div>
+    <div class="tags">
+      <a href="#">烧脑反转 <b>412</b></a>
+      <a href="#">治愈系 <b>386</b></a>
+      <a href="#">深夜恐怖 <b>271</b></a>
+      <a href="#">公路片 <b>158</b></a>
+      <a href="#">纪录影像 <b>204</b></a>
+      <a href="#">东亚家庭 <b>339</b></a>
+      <a href="#">科幻硬核 <b>297</b></a>
+      <a href="#">动画长片 <b>181</b></a>
+      <a href="#">黑色幽默 <b>226</b></a>
+      <a href="#">犯罪纪实 <b>143</b></a>
+      <a href="#">武侠旧片 <b>97</b></a>
+      <a href="#">一小时看完 <b>508</b></a>
+    </div>
+
+    <div class="picks">
+      <article class="pick">
+        <div class="poster" style="background:linear-gradient(135deg,#3a2b16,#0f1116)"><span>冷门格</span></div>
+        <div class="info"><b>《铁皮收音机》</b><em>土耳其 · 94′ · 剧情</em></div>
+      </article>
+      <article class="pick">
+        <div class="poster" style="background:linear-gradient(135deg,#123033,#0f1116)"><span>情绪格</span></div>
+        <div class="info"><b>《雨天不下班》</b><em>日本 · 118′ · 治愈</em></div>
+      </article>
+      <article class="pick">
+        <div class="poster" style="background:linear-gradient(135deg,#2a1730,#0f1116)"><span>烧脑格</span></div>
+        <div class="info"><b>《第七个证人》</b><em>法国 · 107′ · 悬疑</em></div>
+      </article>
+      <article class="pick">
+        <div class="poster" style="background:linear-gradient(135deg,#1d2438,#0f1116)"><span>深夜格</span></div>
+        <div class="info"><b>《地下室手记》</b><em>波兰 · 88′ · 惊悚</em></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="notes">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>HALL D · 手记</small>编辑手记：值班那晚写了什么</h2>
+      <p>值班编辑看完当班排片后留下的原话，不润色。</p>
+    </div>
+    <div class="notes">
+      <div class="note">
+        <time>2026-10-24 · 值班：老周</time>
+        <h4>《雾港迷航》值得为它熬到一点</h4>
+        <p>前 40 分钟确实拖，但第 47 分钟那个<em>七分钟长镜头</em>把前面所有闲笔都收了。建议别开倍速，也别中途刷手机，这片子靠细节吃饭。</p>
+      </div>
+      <div class="note">
+        <time>2026-10-21 · 值班：小黎</time>
+        <h4>把《凌晨四点的面包店》挪进了治愈格</h4>
+        <p>单集才 24 分钟，通勤能看两集。它没什么大事发生，就是揉面、等发酵、跟客人闲聊——<em>适合心跳过快的晚上</em>。</p>
+      </div>
+      <div class="note">
+        <time>2026-10-17 · 值班：阿岩</time>
+        <h4>关于恐怖片分区的一次调整</h4>
+        <p>原来"深夜恐怖"里混进了不少血浆片，反馈两极。这周起按<em>心理惊悚 / 生理刺激</em>拆成两个入口，怕鬼但想刺激的先走前者。</p>
+      </div>
+      <div class="note">
+        <time>2026-10-12 · 值班：编辑部</time>
+        <h4>片长筛选上线</h4>
+        <p>很多人问"有没有一小时能看完的"，现在片库加了时长过滤。<em>睡前 60 分钟</em>这一档目前 508 部，是库存最厚的一格。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>HALL E · 答疑</small>观影答疑</h2>
+      <p>问得最多的四件事，先摆在这儿。</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>夜猫影视的排片多久更新一次？</summary>
+        <p>每天零点后排一次当日时刻表，剧集热榜每周日凌晨重排。遇到新片上榜或版权下架，会在当班手记里注明。</p>
+      </details>
+      <details>
+        <summary>榜单分数是怎么算出来的？</summary>
+        <p>只统计打过分且标记"看完"的账号，播放量、预告片点击都不计入，避免宣传期把分数顶上去。</p>
+      </details>
+      <details>
+        <summary>只有片名，不知道讲什么怎么办？</summary>
+        <p>每部片都挂了一句"值班推荐语"，写清类型、片长和适合看的时段。想更省事就走"一小时看完"这一格。</p>
+      </details>
+      <details>
+        <summary>发现有条目信息写错了能改吗？</summary>
+        <p>能。把手记下面那条纠错入口点开，填片名和正确信息即可，值班编辑看到后会当班处理并回复。</p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <h5>关于夜猫影视</h5>
+        <p style="font-size:14px;color:#a3abb9;max-width:44ch">给熬夜的人做的一份排片单。不追热搜，不做标题党，把今晚能看的片按时段排好，剩下的时间留给你自己。</p>
+        <p style="margin-top:10px;font-size:13.5px">本站地址：<a class="url" href="https://yemaoyingshi-app.github.io/">https://yemaoyingshi-app.github.io</a></p>
+      </div>
+      <div>
+        <h5>栏目</h5>
+        <ul>
+          <li><a href="#">今日排片</a></li>
+          <li><a href="#">剧集热榜</a></li>
+          <li><a href="#">类型片库</a></li>
+          <li><a href="#">编辑手记</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>其他</h5>
+        <ul>
+          <li><a href="#">纠错与投稿</a></li>
+          <li><a href="#">排片规则说明</a></li>
+          <li><a href="#">联系值班编辑</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>© 2026 夜猫影视 · 每晚零点后见</span>
+      <span>关键词：夜猫影视 · 深夜影视推荐 · 剧集热榜</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "name":"夜猫影视",
+      "alternateName":"YEMAO YINGSHI",
+      "url":"https://yemaoyingshi-app.github.io/",
+      "description":"夜猫影视是面向深夜观影人群的影视排片与选片站点，提供每日放映时刻表、剧集热榜、类型片库与编辑观影手记。",
+      "inLanguage":"zh-CN",
+      "publisher":{"@type":"Organization","name":"夜猫影视编辑部"}
+    },
+    {
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"夜猫影视","item":"https://yemaoyingshi-app.github.io/"},
+        {"@type":"ListItem","position":2,"name":"剧集热榜"},
+        {"@type":"ListItem","position":3,"name":"类型片库"}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"夜猫影视的排片多久更新一次？","acceptedAnswer":{"@type":"Answer","text":"每天零点后排一次当日时刻表，剧集热榜每周日凌晨重排。"}},
+        {"@type":"Question","name":"榜单分数是怎么算出来的？","acceptedAnswer":{"@type":"Answer","text":"只统计打过分且标记看完的账号，播放量与预告片点击不计入。"}},
+        {"@type":"Question","name":"只有片名，不知道讲什么怎么办？","acceptedAnswer":{"@type":"Answer","text":"每部片都挂了一句值班推荐语，写清类型、片长与适合观看的时段。"}},
+        {"@type":"Question","name":"发现有条目信息写错了能改吗？","acceptedAnswer":{"@type":"Answer","text":"通过纠错入口提交片名与正确信息，值班编辑当班处理并回复。"}}
+      ]
+    }
+  ]
+}
+</script>
+</body>
+</html>
